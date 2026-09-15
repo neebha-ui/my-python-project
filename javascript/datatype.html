@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Datatypes in JavaScript</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color:rgb(139, 135, 222);
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .container {
+            width: 500px;
+            margin: auto;
+            padding: 30px;
+            background-color: black;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: red;
+        }
+
+        #output {
+            margin-top: 20px;
+            padding: 20px;
+            font-size: 18px;
+            line-height: 1.8;
+            background-color: burlywood;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <h1>JavaScript Datatypes</h1>
+
+        <div id="output"></div>
+
+    </div>
+
+
+    <script>
+
+        function show(text) {
+            document.getElementById("output").innerHTML +=
+                text + "<br>";
+        }
+
+
+        // 1. String
+        let studentName = "Raju";
+        show("Student Name: " + studentName);
+
+
+        // 2. Number
+        let studentAge = 24;
+        show("Student Age: " + studentAge);
+
+
+        // 3. Boolean
+        let isStudent = true;
+        show("Is Student: " + isStudent);
+
+
+        // 4. Undefined
+        let studentPhone;
+        show("Student Phone: " + studentPhone);
+
+
+        // 5. Null
+        let studentAddress = null;
+        show("Student Address: " + studentAddress);
+
+
+        // 6. Object
+        let person = {
+            studentName: "Raju",
+            age: 25
+        };
+
+        show("Object: " + JSON.stringify(person));
+
+
+        // 7. Array
+        let pythonLibraries = [
+            "Pandas",
+            "NumPy",
+            "Matplotlib",
+            "Django"
+        ];
+
+        show("Array: " + pythonLibraries);
+
+
+        // 8. BigInt
+        let studentRegistrationNumber =
+            12345678901234n;
+
+        show("Student Registration Number: " + studentRegistrationNumber
+        );
+
+
+        // 9. Symbol
+        let studentId = Symbol("studentId");
+
+        show("Symbol Student ID: " +studentId.toString()
+        );
+
+    </script>
+    </body>
+    </html>
+
+

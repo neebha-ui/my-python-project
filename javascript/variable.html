@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JavaScript Variables</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightblue;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .container {
+            width: 500px;
+            margin: auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color:red;
+        }
+
+        .keyword {
+            font-weight: bold;
+            color:red
+        }
+
+        .output {
+            margin-top: 20px;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <h1>JavaScript Variables</h1>
+
+        <p>
+            Let's see how
+            <span class="keyword">var</span>,
+            <span class="keyword">let</span>,
+            and
+            <span class="keyword">const</span>
+            work.
+        </p>
+
+
+        <div class="output" id="result"></div>
+
+
+        <script>
+
+            // Using var
+            var studentName = "Neebha";
+
+
+            // Using let
+            let studentAge = 25;
+
+
+            // Using const
+            const collegeName =
+
+                "Kakinada Institute of Engineering and Technology";
+
+            document.getElementById("result").innerHTML = `
+
+                <b>var studentName = "Neebha";</b><br>
+
+                Student Name: ${studentName}<br><br>
+
+
+                <b>let studentAge = 25;</b><br>
+
+                Student Age: ${studentAge}<br><br>
+
+
+                <b>const collegeName =
+                "Kakinada Institute of Engineering and Technology";</b><br>
+
+                College Name: ${collegeName}<br><br>
+
+
+                <span class="keyword">var</span>
+                can be changed and redeclared.<br>
+
+                <span class="keyword">let</span>
+                can be changed but cannot be redeclared.<br>
+
+                <span class="keyword">const</span>
+                cannot be changed or redeclared.
+
+            `;
+
+        </script>
+
+    </div>
+
+</body>
+
+</html>

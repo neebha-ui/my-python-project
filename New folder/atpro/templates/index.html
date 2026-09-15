@@ -1,0 +1,298 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=l,0">
+        <title>Calculator</title>
+    </head>
+<body>
+<h1>Calculator</h1>
+<form method = "Post">
+    {% csrf_token %}
+    <label for="finput">First Number</label><br>
+    <input
+     type="text"
+     id = "finput"
+     name = "a"
+     placeholder="Enter the first number"
+     >
+     <br><br>
+     <label for="sinput">Second Number</label><br>
+     <input
+     type="text"
+     id = "finput"
+     name = "b"
+     placeholder="Enter the second number"
+     >
+     <br><br>
+     <label for="opr">select operator</label><br>
+     <select name="opr" id="opr">
+       <option value="+">Addition (+)</option>
+       <option value="-">Subtraction (-)</option>
+       <option value="*">Multiplication (*)</option>
+       <option value="**">Exponent (**)</option>
+</select>
+<br><br>
+     <button type = "submit">Calculate</button><br>
+     <label>Result</label><br>
+     <input
+      type = "text"
+      value = "{{sloution}}"
+      placeholder="Result"
+      >
+</form>
+</body>
+</html> -->
+
+
+<!-- / -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Calculator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0d0f12;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .calc-card {
+            background: #161920;
+            padding: 28px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            border: 1px solid #232733;
+            width: 100%;
+            max-width: 380px;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 1.6rem;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #a0aec0;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        input[type="number"],
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 12px 14px;
+            background-color: #0d0f12;
+            border: 1px solid #2d3748;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+        }
+
+        /* Active field highlight */
+        .active-input {
+            border-color: #007bff !important;
+            background-color: #121722 !important;
+        }
+
+        /* Number Buttons 1 to 10 Grid */
+        .number-pad-title {
+            font-size: 0.8rem;
+            color: #718096;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .num-pad {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .num-btn {
+            padding: 12px 0;
+            font-size: 1rem;
+            font-weight: 600;
+            background-color: #232733;
+            color: #ffffff;
+            border: 1px solid #2d3748;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .num-btn:hover {
+            background-color: #2d3446;
+            border-color: #4a5568;
+        }
+
+        .num-btn:active {
+            transform: scale(0.95);
+            background-color: #007bff;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            margin-top: 6px;
+            margin-bottom: 16px;
+        }
+
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+
+        input[readonly] {
+            background-color: #090a0d;
+            color: #00ff88;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calc-card">
+    <h1>Calculator</h1>
+    
+    <form method="POST" id="calcForm">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="finput">First Number</label>
+            <input
+             type="number"
+             step="any"
+             id="finput"
+             name="a"
+             placeholder="Enter the first number"
+             required
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="sinput">Second Number</label>
+            <input
+             type="number"
+             step="any"
+             id="sinput"
+             name="b"
+             placeholder="Enter the second number"
+             required
+            >
+        </div>
+
+        <!-- Number Buttons 1 to 10 Quick Pad -->
+        <div class="number-pad-title">Tap input field above, then tap numbers:</div>
+        <div class="num-pad">
+            <button type="button" class="num-btn" onclick="pressNum('1')">1</button>
+            <button type="button" class="num-btn" onclick="pressNum('2')">2</button>
+            <button type="button" class="num-btn" onclick="pressNum('3')">3</button>
+            <button type="button" class="num-btn" onclick="pressNum('4')">4</button>
+            <button type="button" class="num-btn" onclick="pressNum('5')">5</button>
+            <button type="button" class="num-btn" onclick="pressNum('6')">6</button>
+            <button type="button" class="num-btn" onclick="pressNum('7')">7</button>
+            <button type="button" class="num-btn" onclick="pressNum('8')">8</button>
+            <button type="button" class="num-btn" onclick="pressNum('9')">9</button>
+            <button type="button" class="num-btn" onclick="pressNum('10')">10</button>
+        </div>
+
+        <div class="form-group">
+            <label for="opr">Select Operator</label>
+            <select name="opr" id="opr">
+                <option value="+">Addition (+)</option>
+                <option value="-">Subtraction (-)</option>
+                <option value="*">Multiplication (*)</option>
+                <option value="**">Exponent (**)</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn-submit">Calculate</button>
+
+        <div class="form-group">
+            <label for="result">Result</label>
+            <input
+             type="text"
+             id="result"
+             value="{{ solution }}"
+             placeholder="Result"
+             readonly
+            >
+        </div>
+    </form>
+</div>
+
+<script>
+    const inputA = document.getElementById('finput');
+    const inputB = document.getElementById('sinput');
+    let activeInput = inputA; // Default focus to First Number
+
+    // Track active input field
+    inputA.addEventListener('focus', () => setActive(inputA));
+    inputB.addEventListener('focus', () => setActive(inputB));
+
+    function setActive(targetInput) {
+        activeInput = targetInput;
+        inputA.classList.remove('active-input');
+        inputB.classList.remove('active-input');
+        targetInput.classList.add('active-input');
+    }
+
+    // Append number clicked from the 1-10 grid
+    function pressNum(val) {
+        if (!activeInput) activeInput = inputA;
+        activeInput.value += val;
+    }
+
+    // Set initial focus state
+    setActive(inputA);
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
