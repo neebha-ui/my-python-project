@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Edit Student Details</h2>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<h3>Student Details</h3>
+
+Roll Number: <input type="text" value="{{ student.roll }}" readonly>
+
+<br><br>
+
+Name: <input type="text" name="name" value="{{ student.name }}">
+
+<br><br>
+
+Age: <input type="text" name="age" value="{{ student.age }}">
+
+<br><br>
+
+Course: <input type="text" name="course" value="{{ student.course }}">
+
+<br><br>
+
+<h3>Marks</h3>
+
+Telugu: <input type="number" name="telugu" value="{{ marks.telugu }}">
+
+<br><br>
+
+English: <input type="number" name="english" value="{{ marks.english }}">
+
+<br><br>
+
+Maths: <input type="number" name="maths" value="{{ marks.maths }}">
+
+<br><br>
+
+Science: <input type="number" name="science" value="{{ marks.science }}">
+
+<br><br>
+
+<button type="submit">Update Student</button>
+
+<a href="{% url 'view_student' %}">Cancel</a>
+
+</form>
+
+{% endblock %}
